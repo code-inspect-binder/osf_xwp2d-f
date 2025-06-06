@@ -1,0 +1,26 @@
+Figures inhibGen.jpeg and fnrGen.jpeg show the results of simulations of the designs used in Glautier and Brudan (2018, 2019) using Pearce's (1994) configural model. Simulations were carried out using d=2 (normal generalisation) and d=3 (reduced generalisation). The other parameters were context salience (0.1), cue salience (0.2), US salience for reinforced trials (0.2), and US salience for unreinforced trials (0.1).
+
+In inhibGen.jpeg the simulation involved 100 each of A:A->X, A:B->Y, A:C->Z, and A:D->X trials during stage 1 where A: indicated context A: and A, B, C, and D are cues paired with outcomes X, Y, and Z (Z=no outcome). The trial order was randomised. In stage 2 (after 400 trials) the trial types were 80 each of B:A->Z, B:Y->Y, and B:C->Z again with order randomised. Stage 3 (after trial 640) involved 20 B:D->Z trials. 1000 simulations were carried out and the results were averaged to show associative strength for the configurations A:D and B:D at each point in the 660 trial sequence. The purpose of the simulation was to verify that the response to B:D was reduced when the model used reduced generalisation, relative to a condition in which 'normal' generalisation was used. 
+
+In fnrGen.jpeg the simulation involved 100 each of I->X and IJ->Z trials (feature negative training) followed by feature negative reversal (after 200 trials) consisting of 80 each of J->X and M->Z trials. A further 20 I-X 'reminder' trials followed (after trial 360). 1000 simulations were carried out and the results were averaged to show associative strength for the configurations I and IJ at each point in the 380 trial sequence. The purpose of the simulation was to verify that the response to IJ was lower after the reversal trials (J->X) when the model used reduced generalisation, relative to a condition in which 'normal' generalisation was used.
+
+The same trial sequences were used in simulations of the Rescorla-Wagner model using the same parameters (above, except d is not relevant). Simulations were carried out allowing unique configural cues for each pair of stimulus elements e.g. IJ -> IJij where ij is a unique configural cue for the conjunction of I an J or A:D -> A:Da:d where a:d is the conjunction of context A and cue D. The salience of configural cues was set at the average value of the elements represented divided by the number of elements represented (see Glautier, 2013).
+
+In inhibGenRW.jpeg it was verified that the response to B:D was reduced when configural cues were included. In fnrGenRW.jpeg it was verified that the response to IJ was lower after the reversal trials when configural cues were included.
+
+An explanation for these patterns can be found in the GD of Glautier and Brudan (2019).
+
+References
+
+Glautier (2013) Revisiting the learning curve (once again), Frontiers in Psychology, 10.3389/fpsyg.2013.00982 
+
+Glautier and Brudan (2018) Preprint GlautierAndBrudan2018 Revised Stable Individual Differences in Occasion Setting located at https://osf.io/xwp2d/
+
+Glautier and Brudan (2019) Preprint GlautierAndBrudan2019 Revised Stable Individual Differences in Occasion Setting located at xxxx
+
+Pearce (1994) Similarity and discrimination - a selective review and a connectionist model. Psychological Review, 101, 587–607.
+
+Rescorla, R. A. & Wagner, A. R. (1972). A theory of Pavlovian conditioning: variations in the effectiveness of reinforcement and non-reinforcement. In A. H. Black &
+W. F. Prokasy (Eds.), Classical conditioning II: Current research and theory (pp. 64–69). New York: Appleton Century Crofts.
+
+NB the 2019 revision of Glautier and Brudan (2018) has changed cue names for Experiment 1. The simulations above used the original (Glautier and Brudan, 2018) cue names.

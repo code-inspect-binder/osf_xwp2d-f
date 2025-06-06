@@ -1,0 +1,528 @@
+\documentclass[man,12pt,floatsintext, a4paper, draftfirst]{apa6}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage[style=apa, sortcites=true,url=false, firstinits=true,doi=false,sorting=nyt, backend=biber]{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
+\usepackage{geometry}
+\usepackage{rotating}
+\usepackage{graphicx}
+\usepackage{units}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{pdflscape}
+\usepackage{subcaption}
+\usepackage{xfrac}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{xspace}
+\usepackage[textfont=normalfont]{caption}
+\usetikzlibrary{arrows,decorations.markings} 
+\usetikzlibrary{arrows.meta}
+\definecolor{lavendermagenta}{rgb}{0.93, 0.51, 0.93}
+
+%see files osPages.pdf, experiments.pdf, osid.r (constructed from E168/E168a.r, E168/explore.r, E175/e175.r) run vim from rwork vim -S osid.vim
+%final osidbf.r/vim
+%files for export
+%osid/ 		osid#2.Rnw
+%			osidbf.Rdata
+%			osidBFExport.r
+%e168/		osid2Export.r
+%			allData168a.Rdata		
+%			allData168b.Rdata
+%e175/		part1.Rdata
+%			part2.Rdata
+%functions/ generic.r
+
+\def\pc{/admin/}
+%set to spg or admin
+\newif\ifsurface
+\surfacefalse
+%\surfacetrue
+%the root r-directory, where common directories and files stored e.g. rwork/functions, rwork/classes
+%the data and r-code for the current document will be stored in e.g. rwork/current so functions could be accessed ../functions
+\def\rroot{c:/users\pc documents/rwork/}
+%define the latex root directory where bibliography stored and where latex /work directory exists
+\def\lroot{c:/users\pc documents/latex/}
+%pegs stuff needed in some documents
+\ifsurface
+ \def\proot{D:/Google Drive/PEGS/document/}
+ \def\groot{d:/google drive/}
+\else
+ \def\proot{C:/Users\pc Google Drive/PEGS/document/}
+ \def\groot{c:/users\pc google drive/}
+\fi
+
+%bibliography
+\def\bd{c:/users\pc documents/latex/allbib.bib}
+\addbibresource{\bd}
+
+\AtEveryBibitem{% Clean up the bibtex rather than editing it see http://codydunne.blogspot.co.uk/2012/01/suppressing-bibtex-fields-for-specific.html
+ \clearfield{note}
+ \clearfield{number}
+ \clearfield{month}
+} 
+
+\input{\lroot work/common1.tex}
+
+\graphicspath{{../../../../workspace/simlib/}}
+
+\author{Steven Glautier and Ovidiu Brudan}
+
+\affiliation{Southampton University}
+
+\title{Stable Individual Differences in Occasion Setting}
+\shorttitle{Differences in Occasion Setting}
+
+\authornote{Correspondence should be addressed to Steven Glautier, School of Psychology, University of Southampton, Southampton, SO17 1BJ, United Kingdom. E-mail: spg@soton.ac.uk, Tel: (+44) 023 8059 2589. Acknowledgements to student volunteer research assistant Jessica Richards for Experiment 1 data collection.}
+
+\abstract{In the current investigation we classified participants as inhibitors or non-inhibitors depending on the extent to which they showed conditioned inhibition in a context that had been used for extinction of a conditioned response. This classification enabled us to predict participant responses in a second experiment which used a different design and a different experimental task. Our results were repeated in two replications and supported by Bayesian analyses. In the second experiment a feature-negative discrimination survived reversal training of the feature to a greater extent in the non-inhibitors than in the inhibitors. We propose that the fundamental distinction between inhibitors and non-inhibitors is based on a tendency to utilise first-order (direct associations) or second-order (occasion-setting) strategies when faced with ambiguous information and that this classification is a stable individual differences attribute. (138 words)}
+
+\keywords{associative learning, inhibition, occasion-setting, response-recovery, feature-negative discrimination, reversal, individual differences}
+
+\leftheader{Glautier, Brudan}
+
+\begin{document}
+\maketitle
+<<intro,child='osidIntro.Rnw'>>=
+@
+
+\section{Experiment 1}
+Participants took part in a two-part computer-based experiment. Both parts involved predictive learning tasks. Participants viewed a series of on-screen trials and they were told that their task was to learn to predict the outcome of each trial on the basis of visual cues presented at the start of each trial. In Part 1 participants learned to predict coloured flashes on the computer screen on the basis of cues provided in the form of visually distinctive objects which `fell' on each trial from the top to the bottom of the computer screen. Towards the end of the trial, which lasted about 5s, the objects passed a `sensor' located in the bottom part of the screen and the coloured flashes, when they occurred, were timed with and said to be triggered by the object passing the sensor. Participants had to press a key to indicate their expectation, with respect to the coloured flashes, on each trial before the objects passed the sensor. There were three options available; key-R to predicted a red flash, key-G to predict a green flash, or no-key to predict no flash. Participants were instructed to make as many correct predictions as possible but minimise incorrect predictions. Full details of the task are given in \textcite{Glautier2013a}. Part 1 contained acquisition, extinction, and response recovery phases. Responses made in a summation test carried out at the end of the extinction phase were used to classify participants as either non-inhibitors or inhibitors.
+
+In Part 2 participants learned to predict payouts for cards dealt in a fictitious casino game on the basis of visually distinctive symbols and colours borne on each card. Each trial consisted of a `hand' containing one or two cards being `dealt' before the participants adjusted an on-screen indicator to judge the likelihood that the hand would be a winning hand. Ratings were made on an 11-point integer scale ([0\ldots10]) labelled `10 Win', `5=Win or Lose', and `0 Lose'. Participants made their judgements in their own time and were asked to make their judgements as accurate as possible, to reflect the true value of the cards in play. There were no actual payments made for the hands dealt in this task. Once the participants had made their rating the hand was `turned' to reveal whether or not it was a winning hand. Full details of the task are given in \textcite[Experiment 1]{Glautier2013a}. Part 2 contained feature negative training, reversal learning for the feature, and the $AB$ compound test in which we examined differences between the participants classified as either non-inhibitors or inhibitors on the basis of their responses in the summation test from Part 1. Inhibitors were defined as those participants who completely suppressed responding to cue G when it was presented in context B after extinction.
+
+\subsection{Method}
+Procedures were approved by the University of Southampton Research Governance Office and the School of Psychology's Ethics Committee.
+
+\subsubsection{Participants}
+Twenty-eight participants were recruited by word of mouth by student volunteer research assistant JR from a local community in Wiltshire, UK. Their mean age was 21 years (range 16-30) and they included 11 males. They were paid £4 on completion.
+
+\subsubsection{Apparatus}
+The experiment was run on a laptop computer with a screen measuring 30.5 cm x 19.2 cm (W x H). The screen was run at 60hz in 32 bit colour mode with pixel resolutions of 1440 x 900. The display was controlled by a computer programs written by the first author in Microsoft C\# language and used Microsoft XNA Game Studio Version 3.1 for rendering of the experimental scenario.
+
+\subsubsection{Design and procedure}
+\label{sec:E1DandP}
+Table \ref{tab:designP1} shows the design for Part 1. The columns in the table show the trial types that were presented in each stage of the task. Different stages took place in different contexts wherein the screen background changed. Acquisition, extinction, and the response recovery test took place the three different contexts i.e. it was an ABC design. Characters A, B, C, and G indicate the identity of the cue object that was present on each trial. Characters X, Y, and Z indicate the trial outcomes. The screen backgrounds that served the roles of contexts A:, B:, and C: were selected randomly without replacement from four possibilities for each participant. The cue objects serving the roles of A, B, C, and G were selected randomly without replacement from 16 possibilities for each participant. The coloured flashes serving the roles of X and Y were selected randomly without replacement from two possibilities (red and green) for each participant. Outcome Z designates the no-flash outcome. Trial order was randomised within each stage separately for each participant subject to the constraint that there could be no more that four repeats of a trial type in a single back-to-back sequence.
+
+Table \ref{tab:designP2} shows the design for Part 2. The columns in the table show the trial types that were presented in each stage of the task. Stages were not differentiated by context changes. Characters A, B, C, D, and M represent different cards, the plus and minus signs indicate the outcome, win or lose, that occurred for that trial type. The cards serving the cue roles A, B, C, D, and M were chosen at random without replacement from 182 possibilities for each participant. The 182 possibilities were formed by combination of 14 different foreground symbols and 13 different background colours -- each card was marked with a foreground symbol presented on a background colour. When two cards were presented onscreen their right-left location was randomised. Trial order was randomised within each stage separately for each participant subject to the constraint that there could be no more that four repeats of a trial type in a single back-to-back sequence. We were interested primarily in the feature negative training (A+, AB- trials) but because feature negative discriminations can be solved on the basis of cue cardinality (one cue reinforced, two cues non-reinforced) we included a concurrent feature positive discrimination (C-, CD+ trials) to ensure that participants attended to the identity of the cues.
+
+\subsubsection{Analysis}
+Data processing in the Results and Data analyses sections presented below were undertaken using R, JAGS, and associated packages \parencite{Plummer2017,RCDT2012}.
+
+<<locate_external_code, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE>>=
+library(knitr)
+read_chunk('..\\..\\..\\rwork\\e168\\osid2Export.r')
+read_chunk('osidBFExport.r')
+@
+
+<<setup, echo=FALSE, include=FALSE, message=FALSE, warning=FALSE>>=
+@
+
+<<setupBayes, echo=FALSE, include=FALSE, message=FALSE, warning=FALSE>>=
+@
+    
+<<resultsBayes, echo=FALSE, include=FALSE, message=FALSE, warning=FALSE>>=
+@
+
+\subsection{Results}
+\subsubsection{Acquistion, extinction, summation test, and recovery} Figure \ref{fig:AtraceE1} shows the proportion of x-responses made in response to cue A during the acquisition, extinction, and response recovery test phases. The proportion of x-responses increased during the acquisition phase, decreased during extinction, and then recovered on the first trial of the recovery test. The proportion of x-responses to cue A was higher on the first trial of the recovery test than it was on the last block of extinction. Figure \ref{fig:GtraceE1} shows the proportion of x-responses made to cue G during the acquisition and summation test phases. Responses increased during the acquisition phase and were reduced during the summation test.
+
+\subsubsection{Feature negative discrimination and feature reversal} Figure \ref{fig:FNE1} shows that the feature negative and the feature positive discriminations were acquired successfully. The outcome was rated more likely on trials with cue A and on trials with the cue compound CD than on trials with the cue compound AB and on trials with cue C. The reversal training discrimination was also acquired successfully; cue B attracted higher outcome ratings than did cue M (Figure \ref{fig:FNRE1}). Of particular interest was survival of the feature negative discrimination following reversal training. The difference in response to cue A and the cue compound AB after reversal training is shown in Figure \ref{fig:FNTE1} where it can be seen that cue B maintained it's capacity to suppress responses to cue A. Responses to cue A were higher on the A+ reminder trials than on the AB- feature negative survival test trials.
+
+\subsubsection{AB compound test}
+Figure \ref{fig:INTE1} shows responses to the AB compound after feature reversal as a function of inhibition group. The Inhibition group produced higher ratings for the outcome than the No-Inhibition group. There were \Sexpr{length(e1$iids)} participants classified as inhibitors out of \Sexpr{length(unique(e1$idata$sno))}.
+
+\section{Experiment 2}
+Differences from Experiment 1 are noted below.
+
+\subsection{Method}
+
+\subsubsection{Participants}
+Fifty-two participants were recruited from the University of Southampton Highfield campus by word of mouth and posted advertisement. Their mean age was 20.6 years (range 18-39) and they included 13 males. Course credit was given for participation.
+
+\subsubsection{Apparatus}
+The experiment was run on personal computers with screens measuring 41 cm x 26 cm (W x H). The screens were run at 75hz in 32 bit colour mode with pixel resolutions of 1440 x 900. 
+
+\subsection{Results}
+
+\subsubsection{Acquistion, extinction, summation test, and recovery} Figure \ref{fig:AtraceE2} shows the proportion of x-responses made in response to cue A during the acquisition, extinction, and response recovery test phases. The proportion of x-responses increased during the acquisition phase, decreased during extinction, and then recovered on the first trial of the recovery test. The proportion of x-responses to cue A was higher on the first trial of the recovery test than it was on the last block of extinction. Figure \ref{fig:GtraceE2} shows the proportion of x-responses made to cue G during the acquisition and summation test phases. Responses increased during the acquisition phase and were reduced during the summation test.
+
+\subsubsection{Feature negative discrimination and feature reversal} Figure \ref{fig:FNE2} shows that the feature negative and the feature positive discriminations were acquired successfully. The outcome was rated more likely on trials with cue A and on trials with the cue compound CD than on trials with the cue compound AB and on trials with cue C. The reversal training discrimination was also acquired successfully; cue B attracted higher outcome ratings than did cue M (Figure \ref{fig:FNRE2}). Of particular interest was survival of the feature negative discrimination following reversal training. The difference in response to cue A and the cue compound AB after reversal training is shown in Figure \ref{fig:FNTE2} where it can be seen that cue B maintained it's capacity to suppress responses to cue A. Responses to cue A were higher on the A+ reminder trials than on the AB- feature negative survival test trials.
+
+\subsubsection{AB compound test}
+Figure \ref{fig:INTE2} shows responses to the AB compound after feature reversal as a function of inhibition group. The Inhibition group produced higher ratings for the outcome than the No-Inhibition group. There were \Sexpr{length(e2$iids)} participants classified as inhibitors out of \Sexpr{length(unique(e2$idata$sno))}.
+
+\section{Data analyses}
+Two main Bayesian analyses were carried out on the critical data from the AB compound test. The analyses were based on examples given in \textcite{Kruschke2015} and \textcite{LeeWagenmakers2014}. Data was combined over both experiments for these analyses. Bayesian analyses were chosen due to their inherent suitability for sequential updating of parameter estimates over repeated runs of an experiment \parencite{Kruschke2013,WagenmakersLodewyckxEtAl2010,Dienes2011} and to obtain full distributional information on the parameters of interest. Under conventional null-hypothesis-testing combining data across experiments requires special techniques to be applied to avoid inflated Type I error rate \parencite{ArmitageBerryEtAl2002} and the order in which the data comes in can influence the result. In contrast Bayesian approaches are explicitly based upon updating of estimates as each new piece of evidence comes in and the order of data arrival does not affect the final conclusions. The R-code, JAGS model specifications, and raw data to check and reproduce the analyses reported below can be found at \url{link to data and analysis}.
+
+\subsection{Analysis 1}
+Figure \ref{tab:gm1} shows a graphical representation of the JAGS model that was used for Analysis 1 in which the posterior distributions for the ratings obtained in the AB compound test were estimated for the non-inhibitor and the inhibitor groups. The ratings of the non-inhibitors ($x_i$) were assumed to come from a Gaussian distribution with mean $\mu$ and standard deviation $\sigma$. The ratings of the inhibitors ($y_i$) were assumed to come from a Gaussian distribution with mean $\mu+\delta$ and standard deviation $\sigma$. The prior on $\mu$ was a Gaussian with mean $\mu_x$ equal to the observed mean from the non-inhibitor group and standard deviation $\sigma_\mu = 100\times \sigma_{xy}$ where $\sigma_{xy}$ was the observed standard deviation pooled across both groups. The prior on $\sigma$ was a uniform distribution over the range $[\sigma_{xy} \times \sfrac{1}{100} \ldots \sigma_{xy} \times 100]$. The prior on $\delta$ was a Gaussian with mean equal to zero and standard deviation $\sigma_\delta = 100 \times \sqrt{2} \times \sigma_{xy}$. Using $\sqrt{2}$ is based on the fact that the variance of difference between two normally distributed random variables $x$ and $y$ is $\sigma_x^2 + \sigma_y^2$ \parencite{Weisstein2017}, therefore the standard deviation of the difference between two normally distributed random variables $x$ and $y$, both of which have standard deviation $\sigma_{xy}$, is $\sqrt{2} \times \sigma_{xy}$. Given these priors a JAGS model was run with three chains, each with randomly generated initial values (within constraints), over 50000 iterations discarding the first 5000 `burn-in' samples. The chains were observed to converge and the posterior distributions presented in Figure \ref{fig:posteriors} were constructed by pooling across chains.
+
+The means of the posterior distributions shown in Figure \ref{fig:posteriors} for the non-inhibitor and inhibitor group ratings were \Sexpr{fn$fndp(noPost_2,2)} ($\mu$) and \Sexpr{fn$fndp(noPost_2+deltaPost_2,2)} ($\mu+\delta$) respectively and the common standard deviation ($\sigma$) estimated for both groups was \Sexpr{fn$fndp(sigma_2,2)}. To answer the question of whether or not the ratings differed for the non-inhibitors and inhibitors we can consider the region of practical equivalence (ROPE) around the mean of the posterior for the non-inhibitors and the 95\% credible interval around the mean of the posterior for the inhibitors \parencite{Kruschke2015}. The ROPE was set at $\mu \pm 0.1 \times \sigma_{xy}$ corresponding to a small effect \parencite{Cohen1988}. The boundaries of the ROPE $[\Sexpr{fn$fndp(rl_2,2)},\Sexpr{fn$fndp(rh_2,2)}]$ excluded the boundaries of the credible interval for $\mu+\delta$, $[\Sexpr{fn$fndp(lo95_2,2)},\Sexpr{fn$fndp(hi95_2,2)}]$.
+
+Figure \ref{fig:posteriors} also shows the raw data and indicates that there are outliers in both groups. Outliers can shift the mean of an estimated distribution and the normal distribution, which assigns very small probabilities to extreme values, is susceptible to such influences. Therefore a follow-up analysis was done in which the $x_i$ and $y_i$ were assumed to come from t-distributions with parameters ($\mu$, $\sigma$, and $\nu$), and ($\mu + \delta$, $\sigma$, and $\nu$) respectively. This is an approach to robust estimation and the heavier tails of the t-distribution, when $\nu < 30$, can accommodate extreme values with less of an impact on the estimated mean \parencite{Kruschke2015}. However, this robust analysis did not produce an appreciable difference in the outcome. The boundaries of the ROPE under this robust analysis were $[\Sexpr{fn$fndp(rl_4,2)},\Sexpr{fn$fndp(rh_4,2)}]$ and the boundaries of the credible interval were $[\Sexpr{fn$fndp(lo95_4,2)},\Sexpr{fn$fndp(hi95_4,2)}]$. The posterior means for the non-inhibitors and inhibitors were \Sexpr{fn$fndp(noPost_4,2)} and \Sexpr{fn$fndp(noPost_4+deltaPost_4,2)}, respectively, a close match to those from the `standard' analysis and consistent with the the estimate of $\nu = \Sexpr{fn$fndp(nuPost_4,2)}$. If anything this robust analysis indicated a larger difference between the means than the standard analysis.
+
+\subsection{Analysis 2}
+Figure \ref{tab:gm2} shows a graphical representation of the JAGS model that was used for Analysis 2 in which the effect size ($\delta$) was estimated for the difference in the AB compound test ratings between the non-inhibitor and inhibitor groups. As previously the ratings of the non-inhibitors ($x_i$) were assumed to come from a Gaussian distribution with mean $\mu$ and standard deviation $\sigma$. In contrast, in this analysis, the ratings of the inhibitors ($y_i$) were assumed to come from a Gaussian distribution with mean $\mu+\alpha$ and standard deviation $\sigma$ where $\alpha = \delta \times \sigma$. The data from both groups was standardised on the mean of the inhibitors using $\sigma_{xy}$ and the priors on $\mu$ and $\delta$ were Cauchy distributions with location and scale parameters 0 and 1, respectively; the prior on $\sigma$ was a half-Cauchy with location and scale 0 and 1, respectively \parencite{LeeWagenmakers2014}.
+
+Figure \ref{fig:effectsizes} shows the prior and posterior distributions for the effect size $\delta$. The mean of the posterior distribution ($\delta$) was \Sexpr{fn$fndp(deltaPost_1,2)} ($\sigma=\Sexpr{fn$fndp(sigma_1,2)}$) and the 95\% credible interval boundaries for $\delta \text{ were } [\Sexpr{fn$fndp(lo95_1,2)},\Sexpr{fn$fndp(hi95_1,2)}]$. The Savage-Dickey Bayes factor shown in the Figure is the ratio of the prior and posterior distributions at $\delta=0$; the probability that the effect size $\delta=0$ is \Sexpr{fn$fndp(bf,2)} less likely given the data, substantial evidence in favour of the alternative hypothesis \parencite{Jeffreys1961}. 
+
+<<discussion,child='osidDisc.Rnw'>>=
+@
+
+\clearpage
+\begin{table}[t]
+\begin{tabular}{lcccc}
+\hline 
+& Acquisition & Extinction & Summation test &  Recovery test  \\ 
+Context & A: & B: & B: & C: \\
+\hline & $A\rightarrow X$ x10 & $A\rightarrow Z$ x8 &                & $A\rightarrow Z$ x2  \\ 
+& $B\rightarrow Y$ x10 & $B\rightarrow Y$ x8 &                &   \\ 		
+& $C\rightarrow Z$ x10 & $C\rightarrow Z$ x8 &                &   \\ 		
+& $G\rightarrow X$ x10 &                   & $G\rightarrow Z$ x2  & \\ 		
+\hline \vspace{2pt}
+\end{tabular}
+\caption{Design for Part 1. Each stage contained the trial types in the numbers indicated (68 trials in total) with order randomised within stage.}
+\label{tab:designP1}
+\end{table}
+
+\begin{table}[b]
+\begin{tabular}{cccc}
+\hline                   &                   & \multicolumn{2}{c}{Feature negative survival}\\ 
+\cline{3-4}
+       Feature negative  &  Feature reversal & Reminder & Test \\
+\hline A+ x10      & B+ x8 &  A+ x2   & AB- x2 \\
+       AB- x10     & M- x8 &          &             \\ 		
+       C- x10      &       &          &   		 \\ 		
+       CD+ x10     &       & 		  & 		 \\ 		
+\hline \vspace{2pt}
+\end{tabular}
+\caption{Design for Part 2. Each stage contained the trial types in the numbers indicated (60 trials in total) with order randomised within stage.}
+\label{tab:designP2}
+\end{table}
+
+\clearpage
+\printbibliography
+
+ \clearpage
+ \begin{table}[t]
+ \begin{tabular}{lr} \hline
+ \multicolumn{2}{c}{\begin{tikzpicture}
+ 	%A stage 2
+ 	\draw(7,2) circle(0.4);
+ 	\coordinate [label=$A$] (A) at (7, 1.75);
+ 	\draw[->](7.4,2) -- (9.5,2);
+ 	\draw(10,2) circle(0.4);
+ 	\draw[-|](8.5,1) -- (8.5,1.7);
+ 	\coordinate [label=$ctxB$] (B) at (8.5,0.5);
+ 	%A stage 1
+ 	\draw(2,2) circle(0.4);
+ 	\coordinate [label=$A$] (A) at (2, 1.75);
+ 	\draw[->](2.4,2) -- (4.5,2);
+ 	\draw(5,2) circle(0.4);
+ 	\coordinate [label=$US$] (X1) at (5, 1.75);
+ 	\coordinate [label=$Acquisition$] (S1) at (3.5,2.5);
+ 	\coordinate [label=$US$] (X1) at (10, 1.75);
+ 	\coordinate [label=$Extinction$] (S1) at (8.5,2.5);
+ 	\end{tikzpicture} } \\
+ &
+ \begin{tikzpicture}
+ %A stage 2
+ \draw(7,2.4) circle(0.4);
+ \coordinate [label=$A$] (A) at (7, 2.15);
+ \coordinate [label=$US$] (X1) at (10, 1.75);
+ \draw[->](7.4,2.4) -- (9.5,2.2);
+ \coordinate [label=$ctxB$] (B) at (6.9,1.3);
+ \draw[-|](7.4,1.5) -- (9.5,1.8);
+ \draw(10,2) circle(0.4);
+ \end{tikzpicture} \\
+ \hline
+ \end{tabular}
+ \captionof{figure}{Illustration of first order and second order associative structures formed during acquisition and extinction (ctxB=context B). The \rwm model suggests first order associations are formed during extinction (bottom-right) whereas an occasion setting model suggests second order associations are formed (top-right). See introductory text starting on pages \pageref{lab:extstr}-\pageref{lab:extstr1} for further details.}
+ \label{fig:extinctionStructures}
+ \end{table}
+ 
+ \begin{figure}[h]
+  \begin{tikzpicture}
+ %LHS top
+    \draw(2,7) circle(0.4);
+    \coordinate [label=$A$] (A) at (2, 6.75);
+    \draw[->](2.4,7) -- (4.5,7);
+    \draw(5,7) circle(0.4);
+    \coordinate [label=$US$] (US) at (5, 6.75);
+    \draw[-|](3.5,6) -- (3.5,6.7);
+    \coordinate [label=$B$] (B) at (3.5,5.25);
+    \draw(3.5,5.5) circle(0.4);
+    \coordinate [label=Second order solutions] (S1) at (6,7.5);
+ %LHS bottom
+    \coordinate [label=First order solutions] (S1) at (6,3);
+       \draw(2,2.4) circle(0.4);
+       \coordinate [label=$A$] (A) at (2, 2.2);
+       \coordinate [label=$US$] (US) at (5, 1.75);
+       \draw[->](2.4,2.4) -- (4.5,2.2);
+       \coordinate [label=$B$] (B) at (2,1.1);
+       \draw(2,1.3) circle(0.4);
+       \draw[-|](2.4,1.3) -- (4.5,1.8);
+       \draw(5,2) circle(0.4);
+       
+ %RHS top
+    \draw(7,7) circle(0.4);
+    \coordinate [label=$A$] (A) at (7, 6.75);
+    \draw[->](7.4,7) -- (9.5,7);
+    \draw(10,7) circle(0.4);
+    \coordinate [label=$US$] (US) at (10, 6.75);
+    \draw[-|](8.5,6) -- (8.5,6.7);
+    \coordinate [label=$B$] (B) at (8.5,5.25);
+    \draw[->](8.9,5.9) -- (9.6,6.6);
+    \draw(8.5,5.5) circle(0.4);
+ %RHS bottom
+       \draw(7,2.4) circle(0.4);
+       \coordinate [label=$A$] (A) at (7, 2.2);
+       \coordinate [label=$US$] (US) at (10, 1.75);
+       \draw[->](7.4,2.4) -- (9.5,2.2);
+       \coordinate [label=$B$] (B) at (7,1.1);
+       \draw(7,1.3) circle(0.4);
+       \draw[->](7.4,1.3) -- (9.5,1.8);
+       \draw(10,2) circle(0.4);
+    
+  \end{tikzpicture}
+  \caption{Status of first and second-order associative structures following training in a feature negative discrimination (left-hand side) and after reinforcement of the feature, B+ trials (right-hand side). See introductory text starting on page \pageref{lab:extstr1} for further details} \label{fig:reversalStructures}
+  \end{figure}
+  
+\clearpage
+\begin{figure}[ht]
+	\begin{center}
+		\begin{subfigure}[b]{0.45\textwidth}
+			<<TRACEAoE1, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+			@
+			\caption{Experiment 1: Cue A} \label{fig:AtraceE1}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.45\textwidth}
+			<<TRACEGoE1, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+			@
+			\caption{Cue G} \label{fig:GtraceE1}
+		\end{subfigure} \\
+		\begin{subfigure}[b]{0.45\textwidth}
+			<<TRACEAoE2, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+			@
+			\caption{Experiment 2: Cue A} \label{fig:AtraceE2}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.45\textwidth}
+			<<TRACEGoE2, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+			@
+			\caption{Cue G} \label{fig:GtraceE2}
+		\end{subfigure} \\
+\caption{Experiments 1 and 2 x-responses to cues A and G during acquisition, extinction, summation, and recovery test phases. Means $\pm$ 1 standard error.}
+	\label{fig:aqexrt}
+	\end{center}
+\end{figure}
+
+\clearpage
+\begin{figure}[ht]
+\begin{center}
+\begin{subfigure}[b]{0.45\textwidth}
+<<FNE1, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+@
+\caption{Experiment 1: training} \label{fig:FNE1}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+<<FNRE1, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+@
+\caption{reversal} \label{fig:FNRE1}
+\end{subfigure} \\
+\begin{subfigure}[b]{0.45\textwidth}
+<<FNE2, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+@
+\caption{Experiment 2: training} \label{fig:FNE2}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+<<FNRE2, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+@
+\caption{reversal} \label{fig:FNRE2}
+\end{subfigure} \\
+\caption{Experiments 1 and 2 outcome-likelihood ratings during feature negative training and feature reversal phases. Means $\pm$ 1 standard error.}
+\label{fig:fnfnr}
+\end{center}
+\end{figure}
+
+\clearpage
+\begin{figure}[ht]
+\begin{center}
+\begin{subfigure}[b]{0.45\textwidth}
+<<FNTE1, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+@
+\caption{Experiment 1} \label{fig:FNTE1}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+<<FNTE2, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+@
+\caption{Experiment 2} \label{fig:FNTE2}
+\end{subfigure} \\
+\caption{Experiments 1 and 2 test for survival of feature negative discrimination following feature reversal. Means $\pm$ 1 standard error.}
+\label{fig:fnt}
+\end{center}
+\end{figure}
+
+\clearpage
+\begin{figure}[ht]
+\begin{center}
+\begin{subfigure}[b]{0.45\textwidth}
+<<InTestE1, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+@
+\caption{Experiment 1} \label{fig:INTE1}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+<<InTestE2, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+@
+\caption{Experiment 2} \label{fig:INTE2}
+\end{subfigure} \\
+\begin{subfigure}[b]{0.9\textwidth}
+<<InTestsAll, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=5, fig.height=5>>=
+@
+\caption{Combined Experiments 1 and 2} \label{fig:INTALL}
+\end{subfigure} \\
+\caption{Top. Experiments 1 and 2 responses to AB compound in feature negative survival test for participants classified as non-inhibitors and inhibitors. Bottom. Data combined over Experiments 1 and 2. Means $\pm$ 1 standard error.}
+\label{fig:inht}
+\end{center}
+\end{figure}
+
+\clearpage
+\def\ms{15mm}
+\def\plw{20mm}
+\def\plh{20mm}
+\begin{table}[t]
+\begin{tabular}{lc}
+\hline
+\multirow{13}{*}{
+	\begin{tikzpicture}[baseline=(current bounding box.north),
+	ocircle/.style={circle,draw,minimum size=\ms},
+	odcircle/.style={circle,draw,minimum size=\ms,double, double distance=2pt},
+	shcircle/.style={circle,draw,minimum size=\ms,fill=black!20},
+	orect/.style={rectangle,draw,minimum size=\ms},
+	shrect/.style={rectangle,draw,minimum size=\ms,fill=black!20},
+	plate/.style={rectangle, draw, rounded corners=3mm,minimum width=\plw, minimum height=\plh}]
+	\node(p1) at (0,0) [plate,label=below:NoInh data]{};
+	\node (xi) at (0,0) [shcircle] {\Large{$x_i$}};
+	\node(p2) at (3,0) [plate,label=below:Inh data]{};
+	\node (yj) at (3,0) [shcircle] {\Large{$y_j$}};
+	\node (mu) at (-0.5,3)[ocircle]{\Large{$\mu$}}; 
+	\node (sig) at (3.5,3)[ocircle]{\Large{$\sigma$}}; 
+	\node (delta) at (1.5,4)[ocircle]{\Large{$\delta$}}; 
+	\node (sigMu) at (-0.5,5.5)[odcircle]{\Large{$\sigma_\mu$}};
+	\node (sigDelta) at (1.5,7)[odcircle]{\Large{$\sigma_\delta$}}; 
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](mu)--(xi);
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](mu)--(yj);
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](sig)--(xi);
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](sig)--(yj);
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](delta)--(yj);
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](sigMu)--(mu);
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](sigDelta)--(delta);
+	\end{tikzpicture}} & \\   &  \\ & \\
+& $\sigma_\delta \leftarrow 100 \times \sqrt{2} \times \sigma_{xy}$ \\
+& $\sigma_\mu \leftarrow 100 \times \sigma_{xy}$ \\
+& $\delta \sim$ Gaussian(0, $\sfrac{1}{\sigma_\delta^2}$)\\
+& $\mu \sim$ Gaussian($\mu_{x}$,$\sfrac{1}{\sigma_\mu^2}$) \\
+& $\sigma \sim$ Uniform($\sigma_{xy} \times \sfrac{1}{100}$, $\sigma_{xy} \times 100$) \\
+& $x_i \sim$ Gaussian($\mu$, $\sfrac{1}{\sigma^2}$) \\
+& $y_j \sim$ Gaussian($\mu+\delta$, $\sfrac{1}{\sigma^2}$) \\
+& \\   & \\  & \\   & \\  
+\hline \vspace{2pt}
+\end{tabular}
+\captionof{figure}{Graphical model for Analysis 1. $\sigma_{xy}$ is pooled standard deviation of observed data from both groups, $\mu_{x}$ is the mean of the data from the non-inhibitors group. The parameterisation of Gaussian distributions in JAGS is in terms of mean and precision where precision is $\sfrac{1}{\sigma^2}$}.
+\label{tab:gm1}
+\end{table}
+
+\clearpage
+\begin{figure}[ht]
+\begin{center}
+<<pltB2, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=7, fig.height=7>>=
+@
+\caption{Jittered raw data and posterior distributions for the ratings given by the non-inhibitors and inhibitors in the AB compound test. The region of practical equivalence and the 95\% Bayesian credible interval are given around the means of the distributions for the non-inhibitors and the inhibitors, respectively.} 
+\label{fig:posteriors}
+\end{center}
+\end{figure}
+
+
+\begin{table}[t]
+\begin{tabular}{lc}
+\hline
+\multirow{13}{*}{
+	\begin{tikzpicture}[baseline=(current bounding box.north),
+	ocircle/.style={circle,draw,minimum size=\ms},
+	odcircle/.style={circle,draw,minimum size=\ms,double, double distance=2pt},
+	shcircle/.style={circle,draw,minimum size=\ms,fill=black!20},
+	orect/.style={rectangle,draw,minimum size=\ms},
+	shrect/.style={rectangle,draw,minimum size=\ms,fill=black!20},
+	plate/.style={rectangle, draw, rounded corners=3mm,minimum width=\plw, minimum height=\plh}]
+	\node(p1) at (0,0) [plate,label=below:NoInh data]{};
+	\node (xi) at (0,0) [shcircle] {\Large{$x_i$}};
+	\node(p2) at (3,0) [plate,label=below:Inh data]{};
+	\node (yj) at (3,0) [shcircle] {\Large{$y_j$}};
+	\node (mu) at (-0.5,3)[ocircle]{\Large{$\mu$}}; 
+	\node (sigma) at (3.5,3)[ocircle]{\Large{$\sigma$}}; 
+	\node (alpha) at (1.5,4)[odcircle]{\Large{$\alpha$}}; 
+	\node (delta) at (1.5,7)[ocircle]{\Large{$\delta$}}; 
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](mu)--(xi);
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](mu)--(yj);
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](sigma)--(xi);
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](sigma)--(yj);
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](alpha)--(yj);
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](sigma)--(alpha);
+	\draw[-{>[scale=2.5,
+		length=2,
+		width=3]}](delta)--(alpha);
+	\end{tikzpicture}} & \\   &  \\ & \\
+& $\delta \sim$ Cauchy(0,1) \\
+& $\mu \sim$ Cauchy(0,1) \\
+& $\alpha \leftarrow \delta \sigma$ \\
+& $\sigma \sim$ Cauchy(0,1)$[0,\infty]$ \\
+& $x_i \sim$ Gaussian($\mu$, $\sfrac{1}{\sigma^2}$) \\
+& $y_j \sim$ Gaussian($\mu+\alpha$, $\sfrac{1}{\sigma^2}$) \\
+& \\   & \\  & \\   & \\  
+\hline \vspace{2pt}
+\end{tabular}
+\captionof{figure}{Graphical model for Analysis 2. The parameterisation of Gaussian distributions in JAGS is in terms of mean and precision where precision is $\sfrac{1}{\sigma^2}$}
+\label{tab:gm2}
+\end{table}
+
+\clearpage
+\begin{figure}[ht]
+\begin{center}
+<<pltB1, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.width=7, fig.height=7>>=
+@
+\caption{Prior and posterior distributions for the effect size ($\delta$) on the difference between the group means for non-inhibitors and inhibitors in the AB compound test. The relative values of the distributions is given at $\delta =0$ and the 95\% Bayesian credible interval is given around the mean of the posterior distribution.} 
+\label{fig:effectsizes}
+\end{center}
+\end{figure}
+
+\end{document}
